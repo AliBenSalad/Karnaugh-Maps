@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Karnaughova mapa</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/04.css') }}">
+  <script>
+      function handleClick(id){
+        let a = document.getElementById(id);
+        let b = document.getElementById("input_" + id);
+        a.value === "0" ? a.value = "1" : a.value = "0";
+        b.value === "0" ? b.value = "1" : b.value = "0";
+      }
+      function copyExpression(id, text){
+        navigator.clipboard.writeText(text);
+      }
+  </script>
+</head>
+<body>
+<h1 class="t">KARNAUGHOVA MAPA</h1>
+
+<p>
+  Výsledný minimalizovaný výraz (kliknutím zkopírujete):
+</p>
+
+<div class ="tooltip">
+  <input type="button" id="exp" value="{{result_expression}}" onclick='copyExpression(this.id, this.value)' onmouseover="copyText(this)" class="button">
+</div>
+
+
+<div>
+    <form action = "/zadani_mapou/karnaughova_mapa?n={{n}}"  method="POST">
+      <table>
+        <tr>
+          <th id ="nothing"></th>
+          {%for j in range(0, karnaugh_map[0] | length)%}
+            <th class = "x">{{x_axis[j]}}</th>
+          {%endfor%}
+        </tr>
+        {%for i in range(0, karnaugh_map | length)%}
+          <tr>
+            <th class="y">
+              {{y_axis[i]}}
+            </th>
+            {%for j in range(0, karnaugh_map[0] | length)%}
+              <td>
+                <div class="item">
+                  <input type="button" id="{{i}}_{{j}}" value="{{karnaugh_map[i][j]}}" onclick='handleClick(this.id)' class="button">
+                  <input type="hidden" id="input_{{i}}_{{j}}" name="{{i}}_{{j}}" value="{{karnaugh_map[i][j]}}"> <!--tato část byla vytvořena s AI (nápad použít heidden tag, protože se name buttonu neukazovalo v request.form.keys v main.py - nešlo se dotázat, co uživatel zakliknul) -->
+                </div>
+              </td>
+            {%endfor%}
+          </tr>
+        {%endfor%}
+      </table>
+      <input type="hidden" id="variables" name="variables" value="{{variables}}">
+      <input type="hidden" id="x_axis" name="x_axis" value="{{x_axis}}">
+      <input type="hidden" id="y_axis" name="y_axis" value="{{y_axis}}">
+      <input type="submit" name="send" id="send" value = "NAČÍST ZNOVU" class = "button" >
+    </form>
+</div>
+
+<div class="groups_pic">
+  <div class="groups">
+    <p class="best_groups">
+      Nejlepší skupiny:
+    </p>
+    {%for group in groups%}
+      <p>
+        <span style="border-color: rgb{{group.color}};">
+          {{group}}
+        </span>
+      </p>
+    {%endfor%}
+  </div>
+
+  <img src="{{url_for('static', filename='../static/Images/map_image.png')}}" alt="Zde by taky měl být OBR">
+</div>
+
+<form action = "/" method="POST">
+  <input type="submit" name="start" id="start" value = "ZPĚT NA ÚVODNÍ STRÁNKU" class = "button" >
+</form>
+</body>
+</html>

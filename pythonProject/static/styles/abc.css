@@ -1,0 +1,53 @@
+body{
+    background: #19350F;
+}
+h1{
+    font-size: 4vw;
+    font-family: Arial, serif;
+    color: white;
+    text-align: center;
+    margin: 4vw;
+}
+p{
+    color: white;
+    font-family: Arial, serif;
+    text-align: center;
+    font-size: 2vw;
+}
+
+.t{
+    color: crimson;
+}
+div{
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    color: #FFFFFF;
+    font-size: 1.5vw;
+    font-family: Arial, serif;
+    padding: 12px 15px;
+    width: 20vw;
+    margin: 10px;
+    background: #19350F;
+    border-color: #FFFFFF;
+    border-width: 3px;
+    cursor: pointer;
+    border-radius: 10px;
+    align-self: center;
+    border-style: solid;
+}
+.button:hover {
+    font-size: 1.5vw;
+    color: #19350F;
+    width: 20vw;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+.button:focus{
+    outline: none;
+}
+
+
+

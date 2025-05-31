@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Karnaughova mapa</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/03.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+    <script>
+        function handleClick(id){
+            let a = document.getElementById(id);
+            let b = document.getElementById("input_" + id);
+            a.value === "0" ? a.value = "1" : a.value = "0";
+            b.value === "0" ? b.value = "1" : b.value = "0";
+        }
+    </script>
+</head>
+<body>
+<h1>ZADÁNÍ PRAVDIVOSTNÍ TABULKOU</h1>
+<div>
+    <p>Počet proměnných : {{n}} </p>
+    {% if errorText %}
+        <p>{{errorText}}</p>
+    {% endif %}
+    <form id = "id" action = "/zadani_tabulkou/vyplnit_tabulku/karnaughova_mapa?n={{n}}&n_col={{n_col}}&n_row={{n_row}}" method="POST">
+        <table>
+            <tr>
+               {%for i in range(0,n)%}
+                <th>
+                    {{alph[i]}}
+                </th>
+                {%endfor%}
+                <th class="result">
+                    Y
+                </th>
+            </tr>
+            {%for i in range(0, y | length)%}
+            <tr>
+                {%for j in range(0, y[0] | length)%}
+                <td>
+                    {{y[i][j]}}
+                </td>
+                {%endfor%}
+                <td class="result">
+                    <div class="item">
+                        <input type="button" id="{{i}}" value="0" onclick='handleClick(this.id)' class="button">
+                        <input type="hidden" id="input_{{i}}" name="{{i}}" value="0"> <!--tato část byla vytvořena s AI (nápad použít hidden tag, protože se name buttonu neukazovalo v request.form.keys v main.py - nešlo se dotázat, co uživatel zakliknul) -->
+                    </div>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+            <input type="submit" name="send" id="{{n}}" value = "POTVRDIT" class = "button" >
+    </form>
+</div>
+
+
+
+</body>
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+
+</html>

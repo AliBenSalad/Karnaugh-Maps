@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Karnaughova mapa</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/02.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+
+</head>
+<body>
+<h1>ZADÁNÍ LOGICKÝM VÝRAZEM</h1>
+<form action="/zadani_vyrazem/karnaughova_mapa" method="POST">
+    <div>
+        <p>{{errorText}}</p>
+        <label for="expression"> Napište logický výraz: </label>
+            <input type="text" id="expression" name="expression" value="{{prefill_value}}" class = "n_input first">
+        <input type="submit" value = "POTVRDIT" class = "n_input second" >
+    </div>
+</form>
+
+
+</body>
+</html>

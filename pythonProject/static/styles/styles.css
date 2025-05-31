@@ -1,0 +1,31 @@
+
+body{
+    text-align: center;
+    align-content: center;
+    color: rebeccapurple;
+}
+div{
+    display: inline-flex;
+    color: aqua;
+}
+img{
+    display: block;
+    width: 20vw;
+    min-width: 330px;
+}
+.t{
+    font-size: 2vw;
+    color: crimson;
+}
+.next{
+    display: block;
+}
+p{
+    display: block;
+}
+table{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: chartreuse;
+}

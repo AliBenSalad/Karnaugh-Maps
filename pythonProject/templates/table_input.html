@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8">
+        <title>Karnaughova mapa</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/02.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+    </head>
+    <body>
+    <h1>ZADÁNÍ PRAVDIVOSTNÍ TABULKOU</h1>
+        <form method="POST" action="/zadani_tabulkou/vyplnit_tabulku">
+            <div>
+                <label for ="n" >Zadejte počet proměnných:  </label>
+                <input type = "number" name = "n" id="n"  min = "1" required class = "n_input first" >
+                <input type="submit" value = "POTVRDIT" class = "n_input second" >
+            </div>
+
+        </form>
+    </body>
+</html>

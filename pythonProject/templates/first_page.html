@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Karnaughova mapa</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/abc.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='../static/Images/favicon.png') }}">
+</head>
+<body>
+<h1>GENERÁTOR KARNAUGHOVÝCH MAP</h1>
+<p>Zvolte typ vstupu:</p>
+
+<form method="POST" action="/zadani_tabulkou" >
+    <div>
+        <input type = "submit" value = "PRAVDIVOSTNÍ TABULKA" class = "button" />
+    </div>
+</form>
+
+<form method="POST" action="/zadani_vyrazem">
+    <div>
+        <input type = "submit" value = "LOGICKÝ VÝRAZ" class = "button"/>
+    </div>
+</form>
+
+</body>
+</html>
