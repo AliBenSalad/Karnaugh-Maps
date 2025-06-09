@@ -9,8 +9,31 @@ h1{
     font-family: Arial, serif;
     color: white;
     text-align: center;
+    margin-top: 2vw;
+    margin-bottom: 1vw;
 }
-
+.hide {
+  display: none;
+}
+.help{
+    cursor: default;
+    border: #FFFFFF solid 3px;
+    border-radius: 10px;
+    padding: 1vw;
+}
+.help:hover{
+    background: #FFFFFF;
+    color: #19350F;
+}
+.help:hover + .hide {
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    margin-top: 2vw;
+    padding-top: 0.1vw;
+    padding-bottom: 0.1vw;
+    font-size: 1vw;
+}
 div{
     display: flex;
     flex-direction: column;
@@ -35,12 +58,18 @@ label{
     width: 70vw;
     height: 5vw;
 }
+#error{
+    background: #FFFFFF;
+    color: #19350F;
+    border: #FFFFFF 3px solid;
+    border-radius: 10px;
+    padding: 1vw;
+}
 .n_input{
     background: none;
-    border-color: #FFFFFF;
-    border-width: 3px;
+    border: #FFFFFF 3px solid;
     border-radius: 10px;
-    border-style: solid;
+    padding: 1vw;
 }
 .n_input.first{
     font-size: 3vw;

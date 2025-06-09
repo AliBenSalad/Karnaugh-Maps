@@ -66,10 +66,10 @@
     <p class="best_groups">
       Nejlepší skupiny:
     </p>
-    {%for group in groups%}
+    {%for i in range(0, groups | length)%}
       <p>
-        <span style="border-color: rgb{{group.color}};">
-          {{group}}
+        <span style="border-color: rgb{{groups[i].color}};">
+          {{best_groups_exp[i]}}
         </span>
       </p>
     {%endfor%}

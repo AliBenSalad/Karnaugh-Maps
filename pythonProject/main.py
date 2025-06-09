@@ -64,8 +64,8 @@ def values_from_expression(request):
         for part in sorted_variables:
             if part not in e.replace('!',''):
                 error = 2
-
-
+        if list(e.replace('!', '')) != list(dict.fromkeys(e.replace('!', ''))):
+            error = 4
 
 
     values = [0] * (2 ** n)
@@ -77,9 +77,12 @@ def values_from_expression(request):
                 try:
                     value[sorted_variables[e[i + 1]]] = 0
                 except KeyError:
-                    error = 2
+                    if e[i+1] == "!":
+                        error = 5
+                    else:
+                        error = 2
                 except IndexError:
-                    error = 2
+                    error = 6
                 i += 2
             elif e[i].isalpha():
                 try:
@@ -87,7 +90,7 @@ def values_from_expression(request):
                 except KeyError:
                     error = 2
                 except IndexError:
-                    error = 2
+                    error = 6
                 i += 1
             else:
                 error = 3
@@ -97,7 +100,6 @@ def values_from_expression(request):
 
     return values, n, y, variables, error
 
-#todo nemůže být None
 
 def values_from_table(request_arg):
     y = []
@@ -172,6 +174,13 @@ def karnaugh_map_result():
                 return render_template('expression_input.html', errorText = "Výraz musí v každém členu obsahovat všechny proměnné.", prefill_value = request.form.get('expression'))
             if error == 3:
                 return render_template('expression_input.html', errorText = "Proměnné musí být označeny znaky z abecedy, ne speciálními znaky.", prefill_value = request.form.get('expression'))
+            if error == 4:
+                return render_template('expression_input.html', errorText = "V některém sčítanci se vyskytuje vícekrát stejná proměnná.", prefill_value = request.form.get('expression'))
+            if error == 5:
+                return render_template('expression_input.html', errorText = 'Ve výrazu se nemůže objevit dvakrát znegovaná proměnná (dva symboly "!" za sebou).', prefill_value = request.form.get('expression'))
+            if error == 6:
+                return render_template('expression_input.html', errorText = "Chybný vstup.", prefill_value = request.form.get('expression'))
+
 
         elif 'zadani_mapou' in request.url:
             karnaugh_map, n, x_axis, y_axis, variables = values_from_map(request)
@@ -203,10 +212,11 @@ def karnaugh_map_result():
     img.save("../pythonProject/static/Images/map_image.png")
 
     result_expression = km.get_minimized_expression(groups, x_axis, y_axis, variables)
+    best_groups_exp = result_expression.split(' + ')
 
     return render_template('karnaugh_map_result.html', n=n, karnaugh_map=karnaugh_map,
                            x_axis=x_axis, y_axis=y_axis, variables=variables,
-                           colors = colors, groups = groups, result_expression = result_expression)
+                           colors = colors, groups = groups, best_groups_exp = best_groups_exp, result_expression = result_expression)
 
 
 if __name__ == '__main__':

@@ -11,9 +11,17 @@
 <h1>ZADÁNÍ LOGICKÝM VÝRAZEM</h1>
 <form action="/zadani_vyrazem/karnaughova_mapa" method="POST">
     <div>
-        <p>{{errorText}}</p>
-        <label for="expression"> Napište logický výraz: </label>
-            <input type="text" id="expression" name="expression" value="{{prefill_value}}" class = "n_input first">
+        {%if errorText %}
+            <p id = error>{{errorText}}</p>
+        {%endif%}
+        <p>Napište logický výraz v úplné disjunktivní normální formě.</p>
+        <div class = "help">NÁPOVĚDA</div>
+        <div class = "hide n_input" >
+            <p>Každý sčítanec musí obsahovat všechny proměnné (na pořadí proměnných nezáleží);</p>
+            <p>NOT značíme "!", OR "+", AND sousledností proměnných;</p>
+            <p>například "(A AND NOT B) OR (NOT A AND B)" je potřeba zadat jako "A!B + !AB"</p>
+        </div>
+        <input type="text" id="expression" name="expression" value="{{prefill_value}}" class = "n_input first">
         <input type="submit" value = "POTVRDIT" class = "n_input second" >
     </div>
 </form>
