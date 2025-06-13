@@ -1,5 +1,2 @@
 Flask
-Colorsys
-Math
-Random
-PIL
+Pillow
